@@ -90,44 +90,80 @@ A complete Django REST Framework API for managing personal recipe collections wi
    ```
 
 ## Usage Examples
+### API Root Page
+http://127.0.0.1:8000/api/
+
 
 ### 1. User Registration
+http://127.0.0.1:8000/api/auth/register/
+
 ```json
-POST /api/auth/register/
 {
-    "username": "chef123",
-    "email": "chef@example.com",
-    "password": "securepass123",
-    "password_confirm": "securepass123",
-    "first_name": "Chef",
-    "last_name": "Smith"
+    "username": "demouser",
+    "email": "demo@example.com",
+    "password": "demopass123",
+    "password_confirm": "demopass123",
+    "first_name": "Demo",
+    "last_name": "User"
+}
+```
+
+### 2. User Login
+http://127.0.0.1:8000/api/auth/login/
+
+```json
+{
+    "username": "demouser",
+    "password": "demopass123"
 }
 ```
 
 ### 2. Create Recipe
+http://127.0.0.1:8000/api/recipes/
+
 ```json
-POST /api/recipes/
 {
-    "name": "Classic Pancakes",
-    "description": "Fluffy breakfast pancakes",
-    "instructions": "1. Mix dry ingredients\n2. Add wet ingredients\n3. Cook on griddle",
+    "name": "Chocolate Chip Cookies",
+    "description": "Classic homemade cookies",
+    "instructions": "1. Mix dry ingredients\n2. Cream butter and sugar\n3. Combine everything\n4. Bake at 350°F for 10 minutes",
     "category": 1,
-    "prep_time": 10,
-    "cook_time": 15,
-    "servings": 4,
-    "difficulty": "easy"
+    "prep_time": 15,
+    "cook_time": 10,
+    "servings": 24,
+    "difficulty": "easy",
+    "ingredients": []
 }
 ```
 
 ### 3. Add Ingredients to Recipe
+http://127.0.0.1:8000/api/recipes/2/ingredients/
+
 ```json
-POST /api/recipes/1/ingredients/
 {
     "ingredient": 1,
-    "quantity": "2.0",
+    "quantity": "2.5",
     "unit": "cups"
 }
 ```
+
+```json
+{
+    "ingredient": 2,
+    "quantity": "2",
+    "unit": "pieces"
+}
+```
+viewing complete recipe: http://127.0.0.1:8000/api/recipes/2/
+
+### Search by Ingredient
+http://127.0.0.1:8000/api/recipes/search_by_ingredient/?ingredient=flour
+
+http://127.0.0.1:8000/api/recipes/search_by_ingredient/?ingredient=eggs
+
+### Category Filtering
+http://127.0.0.1:8000/api/categories/
+
+http://127.0.0.1:8000/api/recipes/?category=1
 
 ## Database Schema
 
